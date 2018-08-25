@@ -5,18 +5,33 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Services.
+ */
 public class Services extends UnicastRemoteObject implements IServices {
 
+	/** The unidades. */
 	private ArrayList<UnidadeSaude> unidades;
+	
+	/** The id count. */
 	private int idCount;
 
 
+	/**
+	 * Instantiates a new services.
+	 *
+	 * @throws RemoteException the remote exception
+	 */
 	protected Services() throws RemoteException {
 		super();
 		unidades = new ArrayList<>();
 		idCount = 0;
 	}
 
+	/* (non-Javadoc)
+	 * @see br.imd.BuscaSaude.IServices#cadastrar(br.imd.BuscaSaude.UnidadeSaude)
+	 */
 	@Override
 	public void cadastrar(UnidadeSaude unidadeSaude) throws RemoteException {
 		unidadeSaude.setId(idCount);
@@ -25,6 +40,9 @@ public class Services extends UnicastRemoteObject implements IServices {
 		idCount++;
 	}
 
+	/* (non-Javadoc)
+	 * @see br.imd.BuscaSaude.IServices#atualizar(br.imd.BuscaSaude.UnidadeSaude)
+	 */
 	@Override
 	public void atualizar(UnidadeSaude unidadeSaude) throws RemoteException {
 		UnidadeSaude unidadeSaudeIterator = null;
@@ -44,6 +62,9 @@ public class Services extends UnicastRemoteObject implements IServices {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see br.imd.BuscaSaude.IServices#excluir(int)
+	 */
 	@Override
 	public void excluir( int id ) throws RemoteException {
 		UnidadeSaude unidadeSaudeIterator = null;
@@ -63,6 +84,9 @@ public class Services extends UnicastRemoteObject implements IServices {
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see br.imd.BuscaSaude.IServices#buscar(int, java.lang.String)
+	 */
 	@Override
 	public ArrayList<UnidadeSaude> buscar(int criterio, String busca) throws RemoteException {
 		
@@ -128,6 +152,9 @@ public class Services extends UnicastRemoteObject implements IServices {
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see br.imd.BuscaSaude.IServices#getUnidades()
+	 */
 	public ArrayList<UnidadeSaude> getUnidades() throws RemoteException {
 		return this.unidades;
 	}

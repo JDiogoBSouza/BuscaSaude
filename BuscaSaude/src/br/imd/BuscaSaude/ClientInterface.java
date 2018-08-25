@@ -8,8 +8,21 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ClientInterface.
+ */
 public class ClientInterface 
 {
+	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 * @throws RemoteException the remote exception
+	 * @throws NotBoundException the not bound exception
+	 * @throws MalformedURLException the malformed URL exception
+	 */
 	public static void main(String[] args) throws RemoteException, NotBoundException, MalformedURLException {
 	
 		/* Busca no modulo de comunicacao remota (RMI Registry).
@@ -193,6 +206,11 @@ public class ClientInterface
 		input.close();
 	}
 	
+	/**
+	 * Imprimir lista.
+	 *
+	 * @param lista the lista
+	 */
 	static void imprimirLista(ArrayList<UnidadeSaude> lista){
 		
 		if( lista.isEmpty() ) {
@@ -209,6 +227,12 @@ public class ClientInterface
 		}
 	}
 	
+	/**
+	 * Criar unidade.
+	 *
+	 * @param id the id
+	 * @return the unidade saude
+	 */
 	static UnidadeSaude criarUnidade(int id) {
 		
 		UnidadeSaude unidade = new UnidadeSaude();
