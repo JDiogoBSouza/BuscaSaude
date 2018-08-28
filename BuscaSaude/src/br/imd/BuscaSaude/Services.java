@@ -67,20 +67,25 @@ public class Services extends UnicastRemoteObject implements IServices {
 	 */
 	@Override
 	public void excluir( int id ) throws RemoteException {
+		
+		
 		UnidadeSaude unidadeSaudeIterator = null;
+		
 		Iterator<UnidadeSaude> inter1 = unidades.iterator();
 		
 		while (inter1.hasNext()) {
 			
 			unidadeSaudeIterator = (UnidadeSaude) inter1.next();
 			
-			
 			if( id == unidadeSaudeIterator.getId() ) {
 				int index = unidades.indexOf(unidadeSaudeIterator);
 				unidades.remove(index);
+				break;
 			}
 			
 		}
+	
+
 		
 	}
 

@@ -28,6 +28,7 @@ public class Principal extends Application   {
 	public void start(Stage primaryStage) throws InvocationTargetException {
 		primeiro = primaryStage;
 		primeiro.setTitle("Cliente");
+		primeiro.setResizable(false);
 		initPrincipal();
 	}
 

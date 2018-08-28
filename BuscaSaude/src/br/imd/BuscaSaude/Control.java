@@ -29,7 +29,7 @@ public class Control implements Initializable {
 	@FXML 
 	TabPane painel;
 	
-	/** -------- COMPONENTES DO PAINEL CADASTRO ---------------- */
+	/** -------- COMPONENTES DO PAINEL CADASTRO / ATUALIZAR / EXCLUIR ---------------- */
 	@FXML
 	TextField nome_field_c;
 	@FXML
@@ -38,36 +38,10 @@ public class Control implements Initializable {
 	TextField city_fileld_c;
 	@FXML
 	TextField skills_field_c;
-	/**---------------------------------------------------------  */
-	
-	/** ---------- COMPONENTES DO PAINEL ATUALIZAR--------------- */
 	@FXML
-	TextField nome_field_A;
+	ListView<UnidadeSaude> listCadastro;
 	@FXML
-	TextField address_field_A;	
-	@FXML
-	TextField city_fileld_A;
-	@FXML
-	TextField skills_field_A;
-	@FXML
-	Button listarAtualizar;
-	@FXML
-	ListView listAtualizar;
-	/**---------------------------------------------------------  */
-	
-	/** ---------- COMPONENTES DO PAINEL EXCLUIR---------------- */
-	@FXML
-	TextField nome_field_E;
-	@FXML
-	TextField address_field_E;	
-	@FXML
-	TextField city_fileld_E;
-	@FXML
-	TextField skills_field_E;
-	@FXML
-	Button listarExcluir;
-	@FXML
-	ListView listExcluir;
+	Button listarCadastro;
 	/**---------------------------------------------------------  */
 	
 	/** ---------- COMPONENTES DO PAINEL BUSCAR ---------------- */
@@ -84,17 +58,13 @@ public class Control implements Initializable {
 	@FXML
 	Button buscaUnidade;
 	@FXML
-	ListView listBuscar;
+	ListView<UnidadeSaude> listBuscar;
 	@FXML
 	TextField busca_field;
 	/**---------------------------------------------------------  */
 	
 	
 	IServices stub;
-	
-	
-	
-	
 	
 	
 	public Control() throws MalformedURLException, RemoteException, NotBoundException {
@@ -115,10 +85,24 @@ public class Control implements Initializable {
 		radio_bairro.setToggleGroup(toggleGroup);
 		radio_endereco.setToggleGroup(toggleGroup);
 		radio_especialidade.setToggleGroup(toggleGroup);
+		
+		listCadastro.setOnMouseClicked(event -> {
+            
+			if( ! (listCadastro.getItems().isEmpty()) ) {
+				
+				UnidadeSaude selectedItem = (UnidadeSaude) listCadastro.getSelectionModel().getSelectedItem();
+
+				nome_field_c.setText( selectedItem.getNome() );
+		    	address_field_c.setText( selectedItem.getEndereco() );
+		    	city_fileld_c.setText( selectedItem.getBairro() );
+		    	skills_field_c.setText( selectedItem.getEspecialidades().get(0) );
+			}
+            	
+        });
 	}
 	
 	@FXML
-	private void adicionarUnidade(ActionEvent event) throws RemoteException {
+	private void cadastrarUnidade(ActionEvent event){
 	    
 		String nome = nome_field_c.getText();
 		String endereco = address_field_c.getText();
@@ -137,61 +121,107 @@ public class Control implements Initializable {
 	    	skills_field_c.setText("");
 	    	
 	    	 new Alert(Alert.AlertType.INFORMATION, " Unidade Cadatrada ").showAndWait();
+	    	 listarCadastro.fire();
+	    	 
+	    	 
 		} catch (Exception e) {
-			// Button was clicked, do something…
 		    new Alert(Alert.AlertType.ERROR, "ERRO DE EXECUÇÃO" ).showAndWait();
 		}
 	    
 	}
 		
 	@FXML
-	private void atualizar_unidade(ActionEvent event) {
+	private void atualizarUnidade(ActionEvent event) {
 		
-		nome_field_A.setText("");
-    	address_field_A.setText("");
-    	city_fileld_A.setText("");
-    	skills_field_A.setText("");
+		UnidadeSaude selectedUnidade;
 		
-	    new Alert(Alert.AlertType.ERROR, nome_field_A.getText() ).showAndWait();
+		if( ! (listCadastro.getItems().isEmpty()) ) {
+			
+			selectedUnidade = (UnidadeSaude) listCadastro.getSelectionModel().getSelectedItem();
+							
+			selectedUnidade.setNome( nome_field_c.getText() );
+			selectedUnidade.setEndereco( address_field_c.getText() );
+			selectedUnidade.setBairro( city_fileld_c.getText() );
+			
+			ArrayList<String> especialidades = new ArrayList<>();
+			especialidades.add(skills_field_c.getText());
+			
+			selectedUnidade.setEspecialidades( especialidades );
+			
+			try {
+		    	stub.atualizar(selectedUnidade);
+		    	
+		    	nome_field_c.setText("");
+		    	address_field_c.setText("");
+		    	city_fileld_c.setText("");
+		    	skills_field_c.setText("");
+		    	
+		    	 new Alert(Alert.AlertType.INFORMATION, " Unidade Atualizada ").showAndWait();
+		    	 
+		    	 listarCadastro.fire();
+		    	 
+			} catch (Exception e) {
+				// Button was clicked, do something…
+			    new Alert(Alert.AlertType.ERROR, "ERRO DE EXECUÇÃO" ).showAndWait();
+			}
+			
+			nome_field_c.setText("");
+	    	address_field_c.setText("");
+	    	city_fileld_c.setText("");
+	    	skills_field_c.setText("");
+		}
+			
+		
 	      
 	}
 	
 	
 	@FXML
-	private void excluirUnidade(ActionEvent event) {
-	    // Button was clicked, do something…
+	private void excluirUnidade(ActionEvent event){
 		
-	    new Alert(Alert.AlertType.ERROR, nome_field_E.getText() ).showAndWait();
+		UnidadeSaude selectedUnidade;
+		
+		if( ! (listCadastro.getItems().isEmpty()) ) {
+			
+			selectedUnidade = (UnidadeSaude) listCadastro.getSelectionModel().getSelectedItem();
+			
+			try{
+				stub.excluir( selectedUnidade.getId() );
+				listarCadastro.fire();
+			}
+			catch( RemoteException e ){
+				
+			}
+		}
 	      
 	}
 	
 	@FXML
-	private void listar(ActionEvent event) throws RemoteException
+	private void listar(ActionEvent event)
 	{		
-		ArrayList<UnidadeSaude> unidades = stub.getUnidades();
+		ArrayList<UnidadeSaude> unidades;
 		
-		if( event.getSource() == listarAtualizar )
+		try
 		{
-			listAtualizar.getItems().clear();
+			unidades = stub.getUnidades();
 			
-			for (UnidadeSaude unidade : unidades)
-	        {
-				listAtualizar.getItems().add(unidade);
+			listCadastro.getItems().clear();
+			
+			for (UnidadeSaude unidade : unidades){
+				listCadastro.getItems().add(unidade);
 	        }
-		}
-		else
+			
+		} catch (RemoteException e)
 		{
-			listExcluir.getItems().clear();
-			
-			for (UnidadeSaude unidade : unidades)
-	        {
-				listExcluir.getItems().add(unidade);
-	        }
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
+		
 	}
 
 	@FXML
-	private void buscarUnidade(ActionEvent event) throws RemoteException {
+	private void buscarUnidade(ActionEvent event){
 	    // Button was clicked, do something…
 		int selecao = 1;
 		
@@ -210,14 +240,25 @@ public class Control implements Initializable {
 		
 		String busca = busca_field.getText();
 		
-		ArrayList<UnidadeSaude> unidades = stub.buscar(selecao, busca );
+		ArrayList<UnidadeSaude> unidades;
 		
-		listBuscar.getItems().clear();
+		try
+		{
+			unidades = stub.buscar(selecao, busca );
+			
+			listBuscar.getItems().clear();
 
-		for (UnidadeSaude unidade : unidades)
-        {
-			listBuscar.getItems().add(unidade);
-        }
+			for (UnidadeSaude unidade : unidades){
+				listBuscar.getItems().add(unidade);
+	        }
+			
+		} catch (RemoteException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
 }
