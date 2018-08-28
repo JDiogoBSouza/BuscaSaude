@@ -5,6 +5,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -19,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
@@ -68,6 +70,25 @@ public class Control implements Initializable {
 	ListView listExcluir;
 	/**---------------------------------------------------------  */
 	
+	/** ---------- COMPONENTES DO PAINEL BUSCAR ---------------- */
+	ToggleGroup toggleGroup;
+	
+	@FXML
+	RadioButton radio_nome;
+	@FXML
+	RadioButton radio_bairro;
+	@FXML
+	RadioButton radio_endereco;
+	@FXML
+	RadioButton radio_especialidade;
+	@FXML
+	Button buscaUnidade;
+	@FXML
+	ListView listBuscar;
+	@FXML
+	TextField busca_field;
+	/**---------------------------------------------------------  */
+	
 	
 	IServices stub;
 	
@@ -82,12 +103,18 @@ public class Control implements Initializable {
 		 * Retorna-se uma referencia de objeto para o stub de servidor, 
 		 * atraves do qual e possivel realizar a invocacao de metodos remotos */
 		stub = (IServices) Naming.lookup("rmi://localhost/Services");
-		
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
+		
+		toggleGroup = new ToggleGroup();
+		
+		radio_nome.setToggleGroup(toggleGroup);
+		radio_bairro.setToggleGroup(toggleGroup);
+		radio_endereco.setToggleGroup(toggleGroup);
+		radio_especialidade.setToggleGroup(toggleGroup);
 	}
 	
 	@FXML
@@ -164,9 +191,33 @@ public class Control implements Initializable {
 	}
 
 	@FXML
-	private void buscarUnidade(ActionEvent event) {
+	private void buscarUnidade(ActionEvent event) throws RemoteException {
 	    // Button was clicked, do something…
-		    
+		int selecao = 1;
+		
+		if( radio_nome.isSelected() ){
+			selecao = 1;
+		}
+		else if( radio_endereco.isSelected() ) {
+			selecao = 2;
+		}
+		else if( radio_bairro.isSelected() ) {
+			selecao = 3;
+		}
+		else if( radio_especialidade.isSelected() ) {
+			selecao = 4;
+		}
+		
+		String busca = busca_field.getText();
+		
+		ArrayList<UnidadeSaude> unidades = stub.buscar(selecao, busca );
+		
+		listBuscar.getItems().clear();
+
+		for (UnidadeSaude unidade : unidades)
+        {
+			listBuscar.getItems().add(unidade);
+        }
 	}
 	
 }
