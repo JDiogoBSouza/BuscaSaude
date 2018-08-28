@@ -3,7 +3,13 @@ package br.imd.BuscaSaude;
 import javafx.event.ActionEvent;
 
 import javafx.scene.control.TextField;
+
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
@@ -47,9 +53,22 @@ public class Control implements Initializable {
 	/**---------------------------------------------------------  */
 	
 	
+	IServices stub;
 	
-	public Control() {
-		// TODO Auto-generated constructor stub
+	
+	
+	
+	
+	
+	public Control() throws MalformedURLException, RemoteException, NotBoundException {
+		
+		/* Busca no modulo de comunicacao remota (RMI Registry).
+		 * Retorna-se uma referencia de objeto para o stub de servidor, 
+		 * atraves do qual e possivel realizar a invocacao de metodos remotos */
+		stub = (IServices) Naming.lookup("rmi://localhost/Services");
+		
+		
+		
 	}
 
 	@Override
@@ -59,11 +78,23 @@ public class Control implements Initializable {
 	}
 	
 	@FXML
-	private void adicionarUnidade(ActionEvent event) {
-	    // Button was clicked, do something…		
-	    new Alert(Alert.AlertType.ERROR, nome_field_c.getText() ).showAndWait();
+	private void adicionarUnidade(ActionEvent event) throws RemoteException {
 	    
-	    
+		String nome = nome_field_c.getText();
+		String endereco = address_field_c.getText();
+		String bairro = city_fileld_c.getText();
+		ArrayList<String> especialidades = new ArrayList<>();
+		especialidades.add(skills_field_c.getText());
+		
+		UnidadeSaude unidadeSaude = new UnidadeSaude(nome, endereco, bairro, especialidades);
+		
+	    try {
+	    	stub.cadastrar(unidadeSaude);
+	    	 new Alert(Alert.AlertType.INFORMATION, " Unidade Cadatrada ").showAndWait();
+		} catch (Exception e) {
+			// Button was clicked, do something…
+		    new Alert(Alert.AlertType.ERROR, "ERRO DE EXECUÇÃO" ).showAndWait();
+		}
 	    
 	}
 		
@@ -87,9 +118,7 @@ public class Control implements Initializable {
 	@FXML
 	private void buscarUnidade(ActionEvent event) {
 	    // Button was clicked, do something…
-		
-	    
-	      
+		    
 	}
 	
 }

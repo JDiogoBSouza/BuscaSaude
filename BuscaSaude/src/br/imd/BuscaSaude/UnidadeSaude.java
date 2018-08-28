@@ -43,6 +43,23 @@ public class UnidadeSaude implements Serializable {
 		this.especialidades = especialidades;
 	}
 	
+	
+	/**
+	 * Instantiates a new unidade saude.
+	 *
+	 * @param nome the nome
+	 * @param endereco the endereco
+	 * @param bairro the bairro
+	 * @param especialidades the especialidades
+	 */
+	public UnidadeSaude(String nome, String endereco, String bairro, ArrayList<String> especialidades) {
+		this.nome = nome;
+		this.endereco = endereco;
+		this.bairro = bairro;
+		this.especialidades = especialidades;
+	}
+	
+	
 	/**
 	 * Instantiates a new unidade saude.
 	 */
