@@ -1,5 +1,7 @@
 package br.imd.BuscaSaude;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 
 import javafx.scene.control.TextField;
@@ -15,9 +17,13 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 
 public class Control implements Initializable {
-
+	
 	
 	/** -------- COMPONENTES DO PAINEL CADASTRO ---------------- */
 	@FXML
@@ -39,6 +45,10 @@ public class Control implements Initializable {
 	TextField city_fileld_A;
 	@FXML
 	TextField skills_field_A;
+	@FXML
+	Button listarAtualizar;
+	@FXML
+	ListView listAtualizar;
 	/**---------------------------------------------------------  */
 	
 	/** ---------- COMPONENTES DO PAINEL EXCLUIR---------------- */
@@ -50,6 +60,10 @@ public class Control implements Initializable {
 	TextField city_fileld_E;
 	@FXML
 	TextField skills_field_E;
+	@FXML
+	Button listarExcluir;
+	@FXML
+	ListView listExcluir;
 	/**---------------------------------------------------------  */
 	
 	
@@ -65,9 +79,7 @@ public class Control implements Initializable {
 		/* Busca no modulo de comunicacao remota (RMI Registry).
 		 * Retorna-se uma referencia de objeto para o stub de servidor, 
 		 * atraves do qual e possivel realizar a invocacao de metodos remotos */
-		stub = (IServices) Naming.lookup("rmi://localhost/Services");
-		
-		
+		stub = (IServices) Naming.lookup("rmi://localhost/Services");		
 		
 	}
 
@@ -100,7 +112,7 @@ public class Control implements Initializable {
 		
 	@FXML
 	private void atualizar_unidade(ActionEvent event) {
-	    // Button was clicked, do something…
+		
 		
 	    new Alert(Alert.AlertType.ERROR, nome_field_A.getText() ).showAndWait();
 	      
@@ -113,6 +125,31 @@ public class Control implements Initializable {
 		
 	    new Alert(Alert.AlertType.ERROR, nome_field_E.getText() ).showAndWait();
 	      
+	}
+	
+	@FXML
+	private void listar(ActionEvent event) throws RemoteException
+	{
+		ArrayList<UnidadeSaude> unidades = stub.getUnidades();
+		
+		if( event.getSource() == listarAtualizar )
+		{
+			listAtualizar.getItems().clear();
+			
+			for (UnidadeSaude unidade : unidades)
+	        {
+				listAtualizar.getItems().add(unidade);
+	        }
+		}
+		else
+		{
+			listExcluir.getItems().clear();
+			
+			for (UnidadeSaude unidade : unidades)
+	        {
+				listExcluir.getItems().add(unidade);
+	        }
+		}
 	}
 
 	@FXML
