@@ -24,6 +24,8 @@ import javafx.scene.control.TabPane;
 
 public class Control implements Initializable {
 	
+	@FXML 
+	TabPane painel;
 	
 	/** -------- COMPONENTES DO PAINEL CADASTRO ---------------- */
 	@FXML
@@ -79,14 +81,13 @@ public class Control implements Initializable {
 		/* Busca no modulo de comunicacao remota (RMI Registry).
 		 * Retorna-se uma referencia de objeto para o stub de servidor, 
 		 * atraves do qual e possivel realizar a invocacao de metodos remotos */
-		stub = (IServices) Naming.lookup("rmi://localhost/Services");		
+		stub = (IServices) Naming.lookup("rmi://localhost/Services");
 		
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-			
 	}
 	
 	@FXML
@@ -102,6 +103,12 @@ public class Control implements Initializable {
 		
 	    try {
 	    	stub.cadastrar(unidadeSaude);
+	    	
+	    	nome_field_c.setText("");
+	    	address_field_c.setText("");
+	    	city_fileld_c.setText("");
+	    	skills_field_c.setText("");
+	    	
 	    	 new Alert(Alert.AlertType.INFORMATION, " Unidade Cadatrada ").showAndWait();
 		} catch (Exception e) {
 			// Button was clicked, do something…
@@ -113,6 +120,10 @@ public class Control implements Initializable {
 	@FXML
 	private void atualizar_unidade(ActionEvent event) {
 		
+		nome_field_A.setText("");
+    	address_field_A.setText("");
+    	city_fileld_A.setText("");
+    	skills_field_A.setText("");
 		
 	    new Alert(Alert.AlertType.ERROR, nome_field_A.getText() ).showAndWait();
 	      
@@ -129,7 +140,7 @@ public class Control implements Initializable {
 	
 	@FXML
 	private void listar(ActionEvent event) throws RemoteException
-	{
+	{		
 		ArrayList<UnidadeSaude> unidades = stub.getUnidades();
 		
 		if( event.getSource() == listarAtualizar )
