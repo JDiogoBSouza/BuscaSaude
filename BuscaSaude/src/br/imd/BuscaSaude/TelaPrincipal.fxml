@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.imd.BuscaSaude.Control">
+   <children>
+      <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="83.0" prefWidth="640.0" VBox.vgrow="ALWAYS">
+         <children>
+            <TextField alignment="CENTER" prefHeight="38.0" prefWidth="640.0" text="Cliente">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
+         </children>
+      </AnchorPane>
+      <TabPane prefHeight="407.0" prefWidth="640.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Cadastrar">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Text fx:id="infor_Unidades" layoutX="15.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Informaçẽos da Unidade:" wrappingWidth="190.13671875">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="14.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome:" wrappingWidth="42.13671875" />
+                        <Text layoutX="14.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Endereço:" wrappingWidth="58.13671875" />
+                        <Text layoutX="14.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bairro:" wrappingWidth="58.13671875" />
+                        <Text layoutX="14.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Especialidade:" wrappingWidth="84.13671875" />
+                        <TextField fx:id="nome_field_c" layoutX="97.0" layoutY="33.0" />
+                        <TextField fx:id="address_field_c" layoutX="97.0" layoutY="64.0" />
+                        <TextField fx:id="city_fileld_c" layoutX="97.0" layoutY="94.0" />
+                        <TextField fx:id="skills_field_c" layoutX="98.0" layoutY="129.0" />
+                        <Button fx:id="adc_unidade_bnt_c" layoutX="138.0" layoutY="167.0" mnemonicParsing="false" onAction="#adicionarUnidade" text="Adicionar Unidade" />
+                        <TextArea fx:id="Msg_Box_C" layoutX="14.0" layoutY="209.0" prefHeight="46.0" prefWidth="248.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Atualizar">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Text layoutX="24.0" layoutY="29.0" nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="Lista De unidades" textAlignment="CENTER" wrappingWidth="199.705078125">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="CROSSHAIR" />
+                           </cursor>
+                        </Text>
+                        <ScrollPane layoutX="34.0" layoutY="44.0" prefHeight="277.0" prefWidth="200.0">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                          </content>
+                        </ScrollPane>
+                        <Text layoutX="272.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Informaçẽos da Unidade:" wrappingWidth="190.13671875">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="271.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome:" wrappingWidth="42.13671875" />
+                        <Text layoutX="271.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Endereço:" wrappingWidth="58.13671875" />
+                        <Text layoutX="271.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bairro:" wrappingWidth="58.13671875" />
+                        <Text layoutX="271.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Especialidade:" wrappingWidth="84.13671875" />
+                        <TextField fx:id="nome_field_A" layoutX="354.0" layoutY="65.0" />
+                        <TextField fx:id="address_field_A" layoutX="354.0" layoutY="96.0" />
+                        <TextField fx:id="city_fileld_A" layoutX="354.0" layoutY="126.0" />
+                        <TextField fx:id="skills_field_A" layoutX="355.0" layoutY="161.0" />
+                        <Button fx:id="atualizar_unidade" layoutX="441.0" layoutY="193.0" mnemonicParsing="false" text="Atualizar" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Excluir">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Text layoutX="44.0" layoutY="37.0" nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="Lista De unidades" textAlignment="CENTER" wrappingWidth="199.705078125">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="CROSSHAIR" />
+                           </cursor>
+                        </Text>
+                        <ScrollPane layoutX="44.0" layoutY="54.0" prefHeight="248.0" prefWidth="200.0">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="197.0" prefWidth="200.0" />
+                           </content>
+                        </ScrollPane>
+                        <Text layoutX="282.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Informaçẽos da Unidade:" wrappingWidth="190.13671875">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="281.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome:" wrappingWidth="42.13671875" />
+                        <Text layoutX="281.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Endereço:" wrappingWidth="58.13671875" />
+                        <Text layoutX="281.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bairro:" wrappingWidth="58.13671875" />
+                        <Text layoutX="281.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Especialidade:" wrappingWidth="84.13671875" />
+                        <TextField fx:id="nome_field_E" layoutX="364.0" layoutY="75.0" />
+                        <TextField fx:id="address_field_E" layoutX="364.0" layoutY="106.0" />
+                        <TextField fx:id="city_fileld_E" layoutX="364.0" layoutY="136.0" />
+                        <TextField fx:id="skills_field_E" layoutX="365.0" layoutY="171.0" />
+                        <Button fx:id="excluirUnidade" layoutX="451.0" layoutY="203.0" mnemonicParsing="false" text="Excluir" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Buscar">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Text layoutX="78.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Criterios de busca" wrappingWidth="122.552734375">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="360.0" layoutY="49.0" nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="Resultado da Busca" textAlignment="CENTER" wrappingWidth="199.705078125">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="CROSSHAIR" />
+                           </cursor>
+                        </Text>
+                        <ScrollPane layoutX="360.0" layoutY="66.0" prefHeight="248.0" prefWidth="200.0">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="197.0" prefWidth="200.0" />
+                           </content>
+                        </ScrollPane>
+                        <CheckBox fx:id="Box" layoutX="50.0" layoutY="94.0" mnemonicParsing="false" text="Nome" />
+                        <CheckBox layoutX="158.0" layoutY="94.0" mnemonicParsing="false" text="Endereço" />
+                        <CheckBox layoutX="51.0" layoutY="150.0" mnemonicParsing="false" text="Bairro" />
+                        <CheckBox layoutX="158.0" layoutY="150.0" mnemonicParsing="false" text="Especialidades" />
+                        <Button fx:id="buscarUnidade" layoutX="203.0" layoutY="190.0" mnemonicParsing="false" text="Buscar" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</VBox>

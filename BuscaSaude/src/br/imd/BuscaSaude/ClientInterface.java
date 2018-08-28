@@ -10,7 +10,8 @@ import java.util.Scanner;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class ClientInterface.
+ * Classe que representa o programa cliente
+ * @author Emanuel borges e Diego Souza
  */
 public class ClientInterface 
 {
