@@ -78,9 +78,9 @@ public class UnidadeSaude implements Serializable {
 
 
 	/**
-	 * Sets the nome.
+	 * Método set do atributo nome 
 	 *
-	 * @param nome the new nome
+	 * @param tem como um parametro o nome a ser setado no atributo
 	 */
 	public void setNome(String nome) {
 		this.nome = nome;

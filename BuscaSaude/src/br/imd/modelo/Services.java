@@ -155,7 +155,6 @@ public class Services extends UnicastRemoteObject implements IServices {
 			
 			
 		}
-		
 		return returnList;		
 		
 	}

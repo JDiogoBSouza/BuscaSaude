@@ -77,7 +77,12 @@ public class Control implements Initializable {
 		/* Busca no modulo de comunicacao remota (RMI Registry).
 		 * Retorna-se uma referencia de objeto para o stub de servidor, 
 		 * atraves do qual e possivel realizar a invocacao de metodos remotos */
-		stub = (IServices) Naming.lookup("rmi://localhost/Services");
+		
+		try{
+			stub = (IServices) Naming.lookup("rmi://localhost/Services");
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/* (non-Javadoc)
@@ -102,7 +107,14 @@ public class Control implements Initializable {
 				nome_field_c.setText( selectedItem.getNome() );
 		    	address_field_c.setText( selectedItem.getEndereco() );
 		    	city_fileld_c.setText( selectedItem.getBairro() );
-		    	skills_field_c.setText( selectedItem.getEspecialidades().get(0) );
+		    	
+		    	ArrayList<String> especialidades = selectedItem.getEspecialidades();		
+		    	String esp = "";
+				
+				for (String especialidade : especialidades) {
+					 esp+= especialidade+";";
+				}
+		    	skills_field_c.setText( esp.substring(0, esp.length()-1) );
 			}
             	
         });
@@ -119,7 +131,14 @@ public class Control implements Initializable {
 		String endereco = address_field_c.getText();
 		String bairro = city_fileld_c.getText();
 		ArrayList<String> especialidades = new ArrayList<>();
-		especialidades.add(skills_field_c.getText());
+		
+		String especialidade = skills_field_c.getText();
+		
+		String[] textoSeparado = especialidade.split(";");
+		
+		for (int i = 0 ; i < textoSeparado.length ; i++) {
+			especialidades.add(textoSeparado[i]);
+		}
 		
 		UnidadeSaude unidadeSaude = new UnidadeSaude(nome, endereco, bairro, especialidades);
 		
@@ -216,7 +235,14 @@ public class Control implements Initializable {
 			selectedUnidade.setBairro( city_fileld_c.getText() );
 			
 			ArrayList<String> especialidades = new ArrayList<>();
-			especialidades.add(skills_field_c.getText());
+			
+			String especialidade = skills_field_c.getText();
+			
+			String[] textoSeparado = especialidade.split(";");
+			
+			for (int i = 0 ; i < textoSeparado.length ; i++) {
+				especialidades.add(textoSeparado[i]);
+			}
 			
 			selectedUnidade.setEspecialidades( especialidades );
 			
