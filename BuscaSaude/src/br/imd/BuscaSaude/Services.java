@@ -5,23 +5,26 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Services.
+ * Classe Services
+ * Implementa os métodos da interface IServices, que faz o papel de CRUD no servidor.
  */
+
+@SuppressWarnings("serial")
 public class Services extends UnicastRemoteObject implements IServices {
 
-	/** The unidades. */
+	/** ArrayList para armazenar todas as unidades de saúde. */
 	private ArrayList<UnidadeSaude> unidades;
 	
-	/** The id count. */
+	/** Contador que identifica cada cadastro no sistema, com propósito de fazer o papel
+	 *  do auto-increment dos banco de dados tradicionais. */
 	private int idCount;
 
 
 	/**
-	 * Instantiates a new services.
+	 * Método construtor da Classe
 	 *
-	 * @throws RemoteException the remote exception
+	 * @throws RemoteException: Exceção que pode ser lançada caso haja algum erro na execução
 	 */
 	protected Services() throws RemoteException {
 		super();

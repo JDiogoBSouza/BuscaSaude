@@ -4,36 +4,29 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class UnidadeSaude.
+ * Classe UnidadeSaude
+ * Responsável por representar uma unidade de saúde.
  */
+
+@SuppressWarnings("serial")
 public class UnidadeSaude implements Serializable {
 	
-	/** The nome. */
 	private String nome;
-	
-	/** The endereco. */
 	private String endereco;
-	
-	/** The bairro. */
 	private String bairro;
-	
-	/** The id. */
 	private int id;
-	
-	/** The especialidades. */
 	private ArrayList<String> especialidades;
 
 	
 	/**
-	 * Instantiates a new unidade saude.
+	 * Método Construtor Com todos os parametros da classe.
 	 *
-	 * @param nome the nome
-	 * @param endereco the endereco
-	 * @param bairro the bairro
-	 * @param id the id
-	 * @param especialidades the especialidades
+	 * @param nome: Nome da unidade de saúde.
+	 * @param endereco: Endereço da unidade de saúde.
+	 * @param bairro: Bairro da unidade de saúde.
+	 * @param id: id da unidade de saúde.
+	 * @param especialidades: Especialidades presentes na unidade de saúde.
 	 */
 	public UnidadeSaude(String nome, String endereco, String bairro, int id, ArrayList<String> especialidades) {
 		this.nome = nome;
@@ -45,12 +38,13 @@ public class UnidadeSaude implements Serializable {
 	
 	
 	/**
-	 * Instantiates a new unidade saude.
+	 * Método Construtor sem ID da classe.
 	 *
-	 * @param nome the nome
-	 * @param endereco the endereco
-	 * @param bairro the bairro
-	 * @param especialidades the especialidades
+	 * @param nome: Nome da unidade de saúde.
+	 * @param endereco: Endereço da unidade de saúde.
+	 * @param bairro: Bairro da unidade de saúde.
+	 * @param id: id da unidade de saúde.
+	 * @param especialidades: Especialidades presentes na unidade de saúde.
 	 */
 	public UnidadeSaude(String nome, String endereco, String bairro, ArrayList<String> especialidades) {
 		this.nome = nome;
@@ -59,9 +53,9 @@ public class UnidadeSaude implements Serializable {
 		this.especialidades = especialidades;
 	}
 	
-	
 	/**
-	 * Instantiates a new unidade saude.
+	 * Método Construtor Padrão da classe.
+	 *
 	 */
 	public UnidadeSaude()
 	{
@@ -74,9 +68,9 @@ public class UnidadeSaude implements Serializable {
 
 	
 	/**
-	 * Gets the nome.
+	 * Método get do atributo nome
 	 *
-	 * @return the nome
+	 * @return Retorna o valor atual do atributo nome.
 	 */
 	public String getNome() {
 		return nome;
@@ -92,12 +86,11 @@ public class UnidadeSaude implements Serializable {
 		this.nome = nome;
 	}
 
-
-
 	/**
-	 * Gets the endereco.
+	/**
+	 * Método get do atributo endereco
 	 *
-	 * @return the endereco
+	 * @return Retorna o valor atual do atributo endereco.
 	 */
 	public String getEndereco() {
 		return endereco;
@@ -105,9 +98,9 @@ public class UnidadeSaude implements Serializable {
 
 
 	/**
-	 * Sets the endereco.
+	 * Método set do atributo endereco.
 	 *
-	 * @param endereco the new endereco
+	 * @param endereco: Novo valor do atributo endereco.
 	 */
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
@@ -115,9 +108,9 @@ public class UnidadeSaude implements Serializable {
 
 
 	/**
-	 * Gets the bairro.
+	 * Método get do atributo bairro.
 	 *
-	 * @return the bairro
+	 * @return Retorna o valor atual do atributo bairro.
 	 */
 	public String getBairro() {
 		return bairro;
@@ -125,9 +118,10 @@ public class UnidadeSaude implements Serializable {
 
 
 	/**
-	 * Gets the id.
+	/**
+	 * Método get do atributo id
 	 *
-	 * @return the id
+	 * @return Retorna o valor atual do atributo id.
 	 */
 	public int getId() {
 		return id;
@@ -135,9 +129,9 @@ public class UnidadeSaude implements Serializable {
 
 
 	/**
-	 * Sets the id.
+	 * Método set do atributo id.
 	 *
-	 * @param id the new id
+	 * @param endereco: Novo valor do atributo id.
 	 */
 	public void setId(int id) {
 		this.id = id;
@@ -145,18 +139,18 @@ public class UnidadeSaude implements Serializable {
 
 
 	/**
-	 * Sets the bairro.
+	 * Método set do atributo bairro.
 	 *
-	 * @param bairro the new bairro
+	 * @param endereco: Novo valor do atributo bairro.
 	 */
 	public void setBairro(String bairro) {
 		this.bairro = bairro;
 	}
 
 	/**
-	 * Gets the especialidades.
+	 * Método get do atributo especialidades.
 	 *
-	 * @return the especialidades
+	 * @return Retorna o valor atual do atributo especialidades.
 	 */
 	public ArrayList<String> getEspecialidades() {
 		return especialidades;
@@ -164,26 +158,29 @@ public class UnidadeSaude implements Serializable {
 
 
 	/**
-	 * Sets the especialidades.
+	 * Método set do atributo especialidades.
 	 *
-	 * @param especialidades the new especialidades
+	 * @param endereco: Novo valor do atributo especialidades.
 	 */
 	public void setEspecialidades(ArrayList<String> especialidades) {
 		this.especialidades = especialidades;
 	}
 	
 	/**
-	 * Adds the especialidade.
+	 * Método para adicionar uma nova especialidade à unidade de saúde.
 	 *
-	 * @param especialidade the especialidade
+	 * @param especialidade: Nova especialidade a ser inserida no atributo ArrayList especialidades.
 	 */
 	public void addEspecialidade(String especialidade){
 		especialidades.add(especialidade);
 	}
 	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	/**
+	 * Método para juntar todas as informações da unidade de saúde em uma string.
+	 *
+	 * @return Retorna uma string contendo todos os atributos da classe.
 	 */
+	@Override
 	public String toString(){
 		
 		String atributos = "";

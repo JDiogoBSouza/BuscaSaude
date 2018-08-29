@@ -1,7 +1,5 @@
 package br.imd.BuscaSaude;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 
 import javafx.scene.control.TextField;
@@ -21,7 +19,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
 public class Control implements Initializable {
@@ -67,6 +64,12 @@ public class Control implements Initializable {
 	IServices stub;
 	
 	
+	/**
+	 * Método construtor da classe controladora dos elementos da interface gráfica
+	 * @throws MalformedURLException
+	 * @throws RemoteException
+	 * @throws NotBoundException
+	 */
 	public Control() throws MalformedURLException, RemoteException, NotBoundException {
 		
 		/* Busca no modulo de comunicacao remota (RMI Registry).
@@ -75,9 +78,11 @@ public class Control implements Initializable {
 		stub = (IServices) Naming.lookup("rmi://localhost/Services");
 	}
 
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
 		
 		toggleGroup = new ToggleGroup();
 		
@@ -101,6 +106,10 @@ public class Control implements Initializable {
         });
 	}
 	
+	/**
+	 * Método para cadastrar uma unidade de saúde no servidor utilizando o stub.
+	 * @param event : Referencia para o criador do evento a ser tratado.
+	 */
 	@FXML
 	private void cadastrarUnidade(ActionEvent event){
 	    
@@ -129,7 +138,11 @@ public class Control implements Initializable {
 		}
 	    
 	}
-		
+	
+	/**
+	 * Método para atualizar as informações de uma unidade de saúde no servidor utilizando o stub.
+	 * @param event : Referencia para o criador do evento a ser tratado.
+	 */
 	@FXML
 	private void atualizarUnidade(ActionEvent event) {
 		
@@ -161,7 +174,6 @@ public class Control implements Initializable {
 		    	 listarCadastro.fire();
 		    	 
 			} catch (Exception e) {
-				// Button was clicked, do something…
 			    new Alert(Alert.AlertType.ERROR, "ERRO DE EXECUÇÃO" ).showAndWait();
 			}
 			
@@ -175,7 +187,10 @@ public class Control implements Initializable {
 	      
 	}
 	
-	
+	/**
+	 * Método para excluir uma unidade de saúde do servidor utilizando o stub.
+	 * @param event : Referencia para o criador do evento a ser tratado.
+	 */
 	@FXML
 	private void excluirUnidade(ActionEvent event){
 		
@@ -196,6 +211,11 @@ public class Control implements Initializable {
 	      
 	}
 	
+	/**
+	 * Método para popular o listView da interface gráfica com todas as unidades de saúde
+	 * armazenadas no servidor.
+	 * @param event : Referencia para o criador do evento a ser tratado.
+	 */
 	@FXML
 	private void listar(ActionEvent event)
 	{		
@@ -219,10 +239,14 @@ public class Control implements Initializable {
 		
 		
 	}
-
+	
+	/**
+	 * Método para realizar a busca de uma unidade de saúde no servidor por diferentes
+	 * critérios utilizando o stub.
+	 * @param event : Referencia para o criador do evento a ser tratado.
+	 */
 	@FXML
 	private void buscarUnidade(ActionEvent event){
-	    // Button was clicked, do something…
 		int selecao = 1;
 		
 		if( radio_nome.isSelected() ){

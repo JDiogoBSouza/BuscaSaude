@@ -1,20 +1,9 @@
 package br.imd.BuscaSaude;
 
-import javafx.event.ActionEvent;
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -24,6 +13,9 @@ public class Principal extends Application   {
 	private VBox tlPrincipal;
 	
 	
+	/* (non-Javadoc)
+	 * @see javafx.application.Application#start(javafx.stage.Stage)
+	 */
 	@Override
 	public void start(Stage primaryStage) throws InvocationTargetException {
 		primeiro = primaryStage;
@@ -33,11 +25,13 @@ public class Principal extends Application   {
 	}
 
 	public static void main(String[] args) {
-		launch(args);
-		
-		
+		launch(args);		
 	}
 	
+	/**
+	 * Método responsável pela inicialização da interface gráfica.
+	 * @throws InvocationTargetException
+	 */
 	private void initPrincipal() throws InvocationTargetException {
 		
 		try {
@@ -59,6 +53,4 @@ public class Principal extends Application   {
 		}
 		
 	}
-	
-	
 }
