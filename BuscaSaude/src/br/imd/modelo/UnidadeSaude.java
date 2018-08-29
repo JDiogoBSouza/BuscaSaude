@@ -1,4 +1,4 @@
-package br.imd.BuscaSaude;
+package br.imd.modelo;
 
 import java.io.Serializable;
 import java.util.ArrayList;

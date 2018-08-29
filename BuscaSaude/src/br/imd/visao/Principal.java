@@ -1,4 +1,4 @@
-package br.imd.BuscaSaude;
+package br.imd.visao;
 
 import java.lang.reflect.InvocationTargetException;
 import javafx.application.Application;

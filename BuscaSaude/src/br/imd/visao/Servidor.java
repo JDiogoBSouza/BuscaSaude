@@ -1,9 +1,11 @@
-package br.imd.BuscaSaude;
+package br.imd.visao;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
+
+import br.imd.modelo.Services;
 
 /**
  * Classe Servidor.

@@ -1,4 +1,4 @@
-package br.imd.BuscaSaude;
+package br.imd.modelo;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -26,7 +26,7 @@ public class Services extends UnicastRemoteObject implements IServices {
 	 *
 	 * @throws RemoteException: Exceção que pode ser lançada caso haja algum erro na execução
 	 */
-	protected Services() throws RemoteException {
+	public Services() throws RemoteException {
 		super();
 		unidades = new ArrayList<>();
 		idCount = 0;

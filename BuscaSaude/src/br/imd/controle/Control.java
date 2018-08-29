@@ -1,4 +1,4 @@
-package br.imd.BuscaSaude;
+package br.imd.controle;
 
 import javafx.event.ActionEvent;
 
@@ -13,6 +13,8 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import br.imd.modelo.IServices;
+import br.imd.modelo.UnidadeSaude;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -92,11 +94,11 @@ public class Control implements Initializable {
 		radio_especialidade.setToggleGroup(toggleGroup);
 		
 		listCadastro.setOnMouseClicked(event -> {
-            
-			if( ! (listCadastro.getItems().isEmpty()) ) {
-				
-				UnidadeSaude selectedItem = (UnidadeSaude) listCadastro.getSelectionModel().getSelectedItem();
+			
+			UnidadeSaude selectedItem = (UnidadeSaude) listCadastro.getSelectionModel().getSelectedItem();
 
+			if( selectedItem != null ) {
+				
 				nome_field_c.setText( selectedItem.getNome() );
 		    	address_field_c.setText( selectedItem.getEndereco() );
 		    	city_fileld_c.setText( selectedItem.getBairro() );
@@ -122,21 +124,80 @@ public class Control implements Initializable {
 		UnidadeSaude unidadeSaude = new UnidadeSaude(nome, endereco, bairro, especialidades);
 		
 	    try {
-	    	stub.cadastrar(unidadeSaude);
 	    	
-	    	nome_field_c.setText("");
-	    	address_field_c.setText("");
-	    	city_fileld_c.setText("");
-	    	skills_field_c.setText("");
-	    	
-	    	 new Alert(Alert.AlertType.INFORMATION, " Unidade Cadatrada ").showAndWait();
-	    	 listarCadastro.fire();
-	    	 
+	    	if( validarCampos() ) {
+	    		
+	    		stub.cadastrar(unidadeSaude);
+		    	
+		    	nome_field_c.setText("");
+		    	address_field_c.setText("");
+		    	city_fileld_c.setText("");
+		    	skills_field_c.setText("");
+		    	
+		    	listarCadastro.fire();
+		    	exibirDialogo(false, "Atenção", "Operação Concluida", "Unidade Cadastrada com Sucesso !");
+	    		
+	    	} 
+	    	else
+	    	{
+	    		exibirDialogo(false, "Atenção", "Operação não Realizada", "Todos os Campos devem ser preenchidos!");
+	    	}
 	    	 
 		} catch (Exception e) {
 		    new Alert(Alert.AlertType.ERROR, "ERRO DE EXECUÇÃO" ).showAndWait();
 		}
 	    
+	}
+	
+	/**
+	 * Método responsável por criar uma caixa de dialogo.
+	 * @param error: Define se é um dialogo de erro ou informativo.
+	 * @param titulo: Titulo a ser exibido no dialogo.
+	 * @param cabecalho: Cabeçalho do dialogo.
+	 * @param mensagem: Mensagem a ser exibida.
+	 */
+	private void exibirDialogo(boolean error, String titulo, String cabecalho, String mensagem){
+		Alert dialogo;
+		
+		if( error  ){
+			dialogo = new Alert(Alert.AlertType.ERROR);
+		}
+		else{
+			dialogo = new Alert(Alert.AlertType.INFORMATION);
+		}
+
+		dialogo.setTitle(titulo);
+		dialogo.setHeaderText(cabecalho);
+        dialogo.setContentText(mensagem);
+        dialogo.showAndWait();
+		
+	}
+	
+	/**
+	 * Função para validar os campos de cadastro/atualização, para não permitir deixa-los em
+	 * branco ou com apenas espaços.
+	 * @return Retorna true se os campos contiverem algum valor, false caso estejam em branco
+	 * ou com apenas espaços.
+	 */
+	private boolean validarCampos(){
+		
+		if( nome_field_c.getText().trim().isEmpty() ) {
+			return false;
+		}
+    	
+		if( address_field_c.getText().trim().isEmpty() ) {
+			return false;
+		}
+				
+		if( city_fileld_c.getText().trim().isEmpty() ) {
+			return false;
+		}
+				
+		if( skills_field_c.getText().trim().isEmpty() ) {
+			return false;
+		}
+		
+		return true;
 	}
 	
 	/**
@@ -146,11 +207,9 @@ public class Control implements Initializable {
 	@FXML
 	private void atualizarUnidade(ActionEvent event) {
 		
-		UnidadeSaude selectedUnidade;
+		UnidadeSaude selectedUnidade = (UnidadeSaude) listCadastro.getSelectionModel().getSelectedItem();;
 		
-		if( ! (listCadastro.getItems().isEmpty()) ) {
-			
-			selectedUnidade = (UnidadeSaude) listCadastro.getSelectionModel().getSelectedItem();
+		if( selectedUnidade != null ) {
 							
 			selectedUnidade.setNome( nome_field_c.getText() );
 			selectedUnidade.setEndereco( address_field_c.getText() );
@@ -162,25 +221,27 @@ public class Control implements Initializable {
 			selectedUnidade.setEspecialidades( especialidades );
 			
 			try {
-		    	stub.atualizar(selectedUnidade);
-		    	
-		    	nome_field_c.setText("");
-		    	address_field_c.setText("");
-		    	city_fileld_c.setText("");
-		    	skills_field_c.setText("");
-		    	
-		    	 new Alert(Alert.AlertType.INFORMATION, " Unidade Atualizada ").showAndWait();
-		    	 
-		    	 listarCadastro.fire();
-		    	 
+				
+				if( validarCampos() ) {
+		    		
+			    	stub.atualizar(selectedUnidade);
+			    	
+			    	nome_field_c.setText("");
+			    	address_field_c.setText("");
+			    	city_fileld_c.setText("");
+			    	skills_field_c.setText("");
+	
+			    	listarCadastro.fire();			
+			    	
+			    	exibirDialogo(false, "Atenção", "Operação Concluida", "Unidade Atualizada com Sucesso !");
+				}
+				else{
+					exibirDialogo(false, "Atenção", "Operação não Realizada", "Todos os Campos devem ser preenchidos!");
+				}
+				
 			} catch (Exception e) {
 			    new Alert(Alert.AlertType.ERROR, "ERRO DE EXECUÇÃO" ).showAndWait();
 			}
-			
-			nome_field_c.setText("");
-	    	address_field_c.setText("");
-	    	city_fileld_c.setText("");
-	    	skills_field_c.setText("");
 		}
 			
 		
@@ -194,15 +255,15 @@ public class Control implements Initializable {
 	@FXML
 	private void excluirUnidade(ActionEvent event){
 		
-		UnidadeSaude selectedUnidade;
+		UnidadeSaude selectedUnidade = (UnidadeSaude) listCadastro.getSelectionModel().getSelectedItem();
 		
-		if( ! (listCadastro.getItems().isEmpty()) ) {
+		if( selectedUnidade != null ) {
 			
-			selectedUnidade = (UnidadeSaude) listCadastro.getSelectionModel().getSelectedItem();
 			
 			try{
 				stub.excluir( selectedUnidade.getId() );
-				listarCadastro.fire();
+		    	listarCadastro.fire();
+		    	exibirDialogo(false, "Atenção", "Operação Concluida", "Unidade excluida com Sucesso !");
 			}
 			catch( RemoteException e ){
 				
@@ -210,6 +271,8 @@ public class Control implements Initializable {
 		}
 	      
 	}
+	
+	
 	
 	/**
 	 * Método para popular o listView da interface gráfica com todas as unidades de saúde

@@ -1,4 +1,4 @@
-package br.imd.BuscaSaude;
+package br.imd.modelo;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
