@@ -7,6 +7,7 @@ import javafx.scene.control.ToggleGroup;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.rmi.ConnectException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -72,7 +73,7 @@ public class Control implements Initializable {
 	 * @throws RemoteException
 	 * @throws NotBoundException
 	 */
-	public Control() throws MalformedURLException, RemoteException, NotBoundException {
+	public Control() {
 		
 		/* Busca no modulo de comunicacao remota (RMI Registry).
 		 * Retorna-se uma referencia de objeto para o stub de servidor, 
@@ -80,8 +81,22 @@ public class Control implements Initializable {
 		
 		try{
 			stub = (IServices) Naming.lookup("rmi://localhost/Services");
-		}catch (Exception e) {
-			e.printStackTrace();
+		}
+		catch (ConnectException e) {
+			exibirDialogo(true, "Atenção", "Falha na conexão", "Não foi possivel se conectar ao Servidor RMI ! O Programa Será Encerrado !");
+			System.exit(-1);
+		}
+		catch( MalformedURLException e ) {
+			exibirDialogo(true, "Atenção", "Falha na conexão", "Endereço do Servidor RMI Inválido ! O Programa Será Encerrado !");
+			System.exit(-1);
+		}
+		catch( NotBoundException e ) {
+			exibirDialogo(true, "Atenção", "Falha no Servidor", "Erro de Bind ! O Programa Será Encerrado !");
+			System.exit(-1);
+		}
+		catch( RemoteException e ) {
+			exibirDialogo(true, "Atenção", "Falha no Servidor", "Ocorreu um erro na execução remota solicidada ! O Programa Será Encerrado !");
+			System.exit(-1);
 		}
 	}
 
@@ -162,8 +177,14 @@ public class Control implements Initializable {
 	    		exibirDialogo(false, "Atenção", "Operação não Realizada", "Todos os Campos devem ser preenchidos!");
 	    	}
 	    	 
-		} catch (Exception e) {
-		    new Alert(Alert.AlertType.ERROR, "ERRO DE EXECUÇÃO" ).showAndWait();
+		} 
+	    catch (ConnectException e) {
+			exibirDialogo(true, "Atenção", "Falha na conexão", "Não foi possivel se conectar ao Servidor RMI ! O Programa Será Encerrado !");
+			System.exit(-1);
+		}
+		catch( RemoteException e ) {
+			exibirDialogo(true, "Atenção", "Falha no Servidor", "Ocorreu um erro na execução remota solicidada ! O Programa Será Encerrado !");
+			System.exit(-1);
 		}
 	    
 	}
@@ -265,8 +286,14 @@ public class Control implements Initializable {
 					exibirDialogo(false, "Atenção", "Operação não Realizada", "Todos os Campos devem ser preenchidos!");
 				}
 				
-			} catch (Exception e) {
-			    new Alert(Alert.AlertType.ERROR, "ERRO DE EXECUÇÃO" ).showAndWait();
+			} 
+		    catch (ConnectException e) {
+				exibirDialogo(true, "Atenção", "Falha na conexão", "Não foi possivel se conectar ao Servidor RMI ! O Programa Será Encerrado !");
+				System.exit(-1);
+			}
+			catch( RemoteException e ) {
+				exibirDialogo(true, "Atenção", "Falha no Servidor", "Ocorreu um erro na execução remota solicidada ! O Programa Será Encerrado !");
+				System.exit(-1);
 			}
 		}
 			
@@ -288,11 +315,22 @@ public class Control implements Initializable {
 			
 			try{
 				stub.excluir( selectedUnidade.getId() );
+				
+		    	nome_field_c.setText("");
+		    	address_field_c.setText("");
+		    	city_fileld_c.setText("");
+		    	skills_field_c.setText("");
+		    	
 		    	listarCadastro.fire();
 		    	exibirDialogo(false, "Atenção", "Operação Concluida", "Unidade excluida com Sucesso !");
+			} 
+		    catch (ConnectException e) {
+				exibirDialogo(true, "Atenção", "Falha na conexão", "Não foi possivel se conectar ao Servidor RMI ! O Programa Será Encerrado !");
+				System.exit(-1);
 			}
-			catch( RemoteException e ){
-				
+			catch( RemoteException e ) {
+				exibirDialogo(true, "Atenção", "Falha no Servidor", "Ocorreu um erro na execução remota solicidada ! O Programa Será Encerrado !");
+				System.exit(-1);
 			}
 		}
 	      
@@ -320,10 +358,14 @@ public class Control implements Initializable {
 				listCadastro.getItems().add(unidade);
 	        }
 			
-		} catch (RemoteException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} 
+	    catch (ConnectException e) {
+			exibirDialogo(true, "Atenção", "Falha na conexão", "Não foi possivel se conectar ao Servidor RMI ! O Programa Será Encerrado !");
+			System.exit(-1);
+		}
+		catch( RemoteException e ) {
+			exibirDialogo(true, "Atenção", "Falha no Servidor", "Ocorreu um erro na execução remota solicidada ! O Programa Será Encerrado !");
+			System.exit(-1);
 		}
 		
 		
@@ -365,10 +407,14 @@ public class Control implements Initializable {
 				listBuscar.getItems().add(unidade);
 	        }
 			
-		} catch (RemoteException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} 
+	    catch (ConnectException e) {
+			exibirDialogo(true, "Atenção", "Falha na conexão", "Não foi possivel se conectar ao Servidor RMI ! O Programa Será Encerrado !");
+			System.exit(-1);
+		}
+		catch( RemoteException e ) {
+			exibirDialogo(true, "Atenção", "Falha no Servidor", "Ocorreu um erro na execução remota solicidada ! O Programa Será Encerrado !");
+			System.exit(-1);
 		}
 		
 		

@@ -1,6 +1,6 @@
 package br.imd.visao;
 
-import java.lang.reflect.InvocationTargetException;
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,7 +17,7 @@ public class Principal extends Application   {
 	 * @see javafx.application.Application#start(javafx.stage.Stage)
 	 */
 	@Override
-	public void start(Stage primaryStage) throws InvocationTargetException {
+	public void start(Stage primaryStage){
 		primeiro = primaryStage;
 		primeiro.setTitle("Cliente");
 		primeiro.setResizable(false);
@@ -30,9 +30,8 @@ public class Principal extends Application   {
 	
 	/**
 	 * Método responsável pela inicialização da interface gráfica.
-	 * @throws InvocationTargetException
 	 */
-	private void initPrincipal() throws InvocationTargetException {
+	private void initPrincipal(){
 		
 		try {
 			
@@ -46,10 +45,9 @@ public class Principal extends Application   {
 			primeiro.show();
 			
 		}
-		catch (Exception e) {
+		catch (IOException e) {
 
-		    // generic exception handling
-		    e.printStackTrace();
+			System.out.println("ERRO: IOException - O Arquivo fxml não pode ser carregado ");
 		}
 		
 	}

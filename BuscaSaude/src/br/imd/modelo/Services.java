@@ -59,6 +59,7 @@ public class Services extends UnicastRemoteObject implements IServices {
 			if(unidadeSaude.getId() == unidadeSaudeIterator.getId() ) {
 				int index = unidades.indexOf(unidadeSaudeIterator);
 				unidades.set(index, unidadeSaude);
+				System.out.println("Unidade Atualizada: \n" + unidadeSaude.toString() );
 			}
 			
 			
@@ -83,6 +84,7 @@ public class Services extends UnicastRemoteObject implements IServices {
 			if( id == unidadeSaudeIterator.getId() ) {
 				int index = unidades.indexOf(unidadeSaudeIterator);
 				unidades.remove(index);
+				System.out.println("Unidade com id " + id + " Excluida.");
 				break;
 			}
 			
@@ -97,6 +99,8 @@ public class Services extends UnicastRemoteObject implements IServices {
 	 */
 	@Override
 	public ArrayList<UnidadeSaude> buscar(int criterio, String busca) throws RemoteException {
+		
+		System.out.print("Busca realizada - Criterio: " + criterio + " Busca: " + busca);
 		
 		UnidadeSaude unidadeSaudeIterator = null;
 		String EspContentList;
@@ -155,6 +159,9 @@ public class Services extends UnicastRemoteObject implements IServices {
 			
 			
 		}
+		
+		System.out.println(" Resultados: " + returnList.size() );
+		
 		return returnList;		
 		
 	}
