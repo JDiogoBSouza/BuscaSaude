@@ -22,11 +22,11 @@ public class UnidadeSaude implements Serializable {
 	/**
 	 * Método Construtor Com todos os parametros da classe.
 	 *
-	 * @param nome: Nome da unidade de saúde.
-	 * @param endereco: Endereço da unidade de saúde.
-	 * @param bairro: Bairro da unidade de saúde.
-	 * @param id: id da unidade de saúde.
-	 * @param especialidades: Especialidades presentes na unidade de saúde.
+	 * @param nome Nome da unidade de saúde.
+	 * @param endereco Endereço da unidade de saúde.
+	 * @param bairro Bairro da unidade de saúde.
+	 * @param id id da unidade de saúde.
+	 * @param especialidades Especialidades presentes na unidade de saúde.
 	 */
 	public UnidadeSaude(String nome, String endereco, String bairro, int id, ArrayList<String> especialidades) {
 		this.nome = nome;
@@ -40,11 +40,10 @@ public class UnidadeSaude implements Serializable {
 	/**
 	 * Método Construtor sem ID da classe.
 	 *
-	 * @param nome: Nome da unidade de saúde.
-	 * @param endereco: Endereço da unidade de saúde.
-	 * @param bairro: Bairro da unidade de saúde.
-	 * @param id: id da unidade de saúde.
-	 * @param especialidades: Especialidades presentes na unidade de saúde.
+	 * @param nome Nome da unidade de saúde.
+	 * @param endereco Endereço da unidade de saúde.
+	 * @param bairro Bairro da unidade de saúde.
+	 * @param especialidades Especialidades presentes na unidade de saúde.
 	 */
 	public UnidadeSaude(String nome, String endereco, String bairro, ArrayList<String> especialidades) {
 		this.nome = nome;
@@ -80,7 +79,7 @@ public class UnidadeSaude implements Serializable {
 	/**
 	 * Método set do atributo nome 
 	 *
-	 * @param tem como um parametro o nome a ser setado no atributo
+	 * @param nome tem como um parametro o nome a ser setado no atributo
 	 */
 	public void setNome(String nome) {
 		this.nome = nome;
@@ -100,7 +99,7 @@ public class UnidadeSaude implements Serializable {
 	/**
 	 * Método set do atributo endereco.
 	 *
-	 * @param endereco: Novo valor do atributo endereco.
+	 * @param endereco Novo valor do atributo endereco.
 	 */
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
@@ -131,7 +130,7 @@ public class UnidadeSaude implements Serializable {
 	/**
 	 * Método set do atributo id.
 	 *
-	 * @param endereco: Novo valor do atributo id.
+	 * @param id Novo valor do atributo id.
 	 */
 	public void setId(int id) {
 		this.id = id;
@@ -141,7 +140,7 @@ public class UnidadeSaude implements Serializable {
 	/**
 	 * Método set do atributo bairro.
 	 *
-	 * @param endereco: Novo valor do atributo bairro.
+	 * @param bairro Novo valor do atributo bairro.
 	 */
 	public void setBairro(String bairro) {
 		this.bairro = bairro;
@@ -160,7 +159,7 @@ public class UnidadeSaude implements Serializable {
 	/**
 	 * Método set do atributo especialidades.
 	 *
-	 * @param endereco: Novo valor do atributo especialidades.
+	 * @param especialidades Novo valor do atributo especialidades.
 	 */
 	public void setEspecialidades(ArrayList<String> especialidades) {
 		this.especialidades = especialidades;
@@ -169,7 +168,7 @@ public class UnidadeSaude implements Serializable {
 	/**
 	 * Método para adicionar uma nova especialidade à unidade de saúde.
 	 *
-	 * @param especialidade: Nova especialidade a ser inserida no atributo ArrayList especialidades.
+	 * @param especialidade Nova especialidade a ser inserida no atributo ArrayList especialidades.
 	 */
 	public void addEspecialidade(String especialidade){
 		especialidades.add(especialidade);

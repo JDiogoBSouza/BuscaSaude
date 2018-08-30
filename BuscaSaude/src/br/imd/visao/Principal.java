@@ -7,6 +7,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * Classe principal que representa o cliente.
+ */
 public class Principal extends Application   {
 
 	private Stage primeiro;

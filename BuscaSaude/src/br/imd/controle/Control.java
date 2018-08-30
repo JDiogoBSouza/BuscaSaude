@@ -29,7 +29,8 @@ public class Control implements Initializable {
 	@FXML 
 	TabPane painel;
 	
-	/** -------- COMPONENTES DO PAINEL CADASTRO / ATUALIZAR / EXCLUIR ---------------- */
+	// -------- COMPONENTES DO PAINEL CADASTRO / ATUALIZAR / EXCLUIR ----------------
+	
 	@FXML
 	TextField nome_field_c;
 	@FXML
@@ -42,9 +43,11 @@ public class Control implements Initializable {
 	ListView<UnidadeSaude> listCadastro;
 	@FXML
 	Button listarCadastro;
-	/**---------------------------------------------------------  */
 	
-	/** ---------- COMPONENTES DO PAINEL BUSCAR ---------------- */
+	// --------------------------------------------------------- 
+	
+	// ---------- COMPONENTES DO PAINEL BUSCAR ---------------- 
+	
 	ToggleGroup toggleGroup;
 	
 	@FXML
@@ -61,7 +64,8 @@ public class Control implements Initializable {
 	ListView<UnidadeSaude> listBuscar;
 	@FXML
 	TextField busca_field;
-	/**---------------------------------------------------------  */
+	
+	//--------------------------------------------------------- 
 	
 	
 	IServices stub;
@@ -69,9 +73,6 @@ public class Control implements Initializable {
 	
 	/**
 	 * Método construtor da classe controladora dos elementos da interface gráfica
-	 * @throws MalformedURLException
-	 * @throws RemoteException
-	 * @throws NotBoundException
 	 */
 	public Control() {
 		
@@ -137,7 +138,7 @@ public class Control implements Initializable {
 	
 	/**
 	 * Método para cadastrar uma unidade de saúde no servidor utilizando o stub.
-	 * @param event : Referencia para o criador do evento a ser tratado.
+	 * @param event Referencia para o criador do evento a ser tratado.
 	 */
 	@FXML
 	private void cadastrarUnidade(ActionEvent event){
@@ -191,10 +192,10 @@ public class Control implements Initializable {
 	
 	/**
 	 * Método responsável por criar uma caixa de dialogo.
-	 * @param error: Define se é um dialogo de erro ou informativo.
-	 * @param titulo: Titulo a ser exibido no dialogo.
-	 * @param cabecalho: Cabeçalho do dialogo.
-	 * @param mensagem: Mensagem a ser exibida.
+	 * @param error Define se é um dialogo de erro ou informativo.
+	 * @param titulo Titulo a ser exibido no dialogo.
+	 * @param cabecalho Cabeçalho do dialogo.
+	 * @param mensagem Mensagem a ser exibida.
 	 */
 	private void exibirDialogo(boolean error, String titulo, String cabecalho, String mensagem){
 		Alert dialogo;
@@ -242,7 +243,7 @@ public class Control implements Initializable {
 	
 	/**
 	 * Método para atualizar as informações de uma unidade de saúde no servidor utilizando o stub.
-	 * @param event : Referencia para o criador do evento a ser tratado.
+	 * @param event Referencia para o criador do evento a ser tratado.
 	 */
 	@FXML
 	private void atualizarUnidade(ActionEvent event) {
@@ -303,7 +304,7 @@ public class Control implements Initializable {
 	
 	/**
 	 * Método para excluir uma unidade de saúde do servidor utilizando o stub.
-	 * @param event : Referencia para o criador do evento a ser tratado.
+	 * @param event Referencia para o criador do evento a ser tratado.
 	 */
 	@FXML
 	private void excluirUnidade(ActionEvent event){
@@ -341,7 +342,7 @@ public class Control implements Initializable {
 	/**
 	 * Método para popular o listView da interface gráfica com todas as unidades de saúde
 	 * armazenadas no servidor.
-	 * @param event : Referencia para o criador do evento a ser tratado.
+	 * @param event Referencia para o criador do evento a ser tratado.
 	 */
 	@FXML
 	private void listar(ActionEvent event)
@@ -374,7 +375,7 @@ public class Control implements Initializable {
 	/**
 	 * Método para realizar a busca de uma unidade de saúde no servidor por diferentes
 	 * critérios utilizando o stub.
-	 * @param event : Referencia para o criador do evento a ser tratado.
+	 * @param event Referencia para o criador do evento a ser tratado.
 	 */
 	@FXML
 	private void buscarUnidade(ActionEvent event){

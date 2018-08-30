@@ -24,7 +24,7 @@ public class Services extends UnicastRemoteObject implements IServices {
 	/**
 	 * Método construtor da Classe
 	 *
-	 * @throws RemoteException: Exceção que pode ser lançada caso haja algum erro na execução
+	 * @throws RemoteException Exceção que pode ser lançada caso haja algum erro na execução
 	 */
 	public Services() throws RemoteException {
 		super();
